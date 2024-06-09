@@ -42,7 +42,7 @@ def list_open_orders(args):
             ol[otype] = [odict for odict in ol[otype]
                          if (odict['pair'] in [args.pair, asset_pair_short(args.pair)] or args.pair == 'all')]
         # sort orders by price
-        ol[otype] = sorted(ol[otype], key=lambda odict: Decimal(odict['price']))
+        ol[otype] = sorted(ol[otype], key=lambda odict: Decimal(odict['price'].strip('+%')))
 
     # final list is concatenation of buy orders followed by sell orders
     ol_all = ol['buy'] + ol['sell']
