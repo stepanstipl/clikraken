@@ -39,6 +39,12 @@ def place_order(args):
             return
         else:
             api_params['price'] = args.price
+    if args.ordertype == 'trailing-stop':
+        if args.price is None:
+            logger.error('For trailing-stop orders, the price must be given!')
+            return
+        else:
+            api_params['price'] = args.price
     elif args.ordertype == 'market':
         if args.price is not None:
             logger.warn('price is ignored for market orders!')
