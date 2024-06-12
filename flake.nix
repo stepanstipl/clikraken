@@ -21,7 +21,7 @@
         let pkgs = nixpkgsFor.${system};
         in {
 
-          clikraken = pkgs.buildPythonPackage rec {
+          default = pkgs.python3Packages.buildPythonPackage rec {
             pname = "clikraken";
             name = "clikraken";
             inherit version;
@@ -62,8 +62,8 @@
 	    ];
 	
 	    shellHook = ''
-	      pipenv install -e .
-	      pipenv shell
+              export PYTHONPATH="$PYTHONPATH:$(pwd)/src" 
+	      alias clikraken="python -m clikraken"
 	    '';
           };
         });
