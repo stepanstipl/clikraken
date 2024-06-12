@@ -36,6 +36,7 @@ from clikraken.api.private.list_open_orders import list_open_orders
 from clikraken.api.private.list_open_positions import list_open_positions
 from clikraken.api.private.place_order import place_order
 from clikraken.api.private.trades import trades
+from clikraken.api.private.get_trade_volume import get_trade_volume
 
 
 def parse_args():
@@ -299,6 +300,16 @@ def parse_args():
         help='comma delimited list of transaction ids to query info about (20 maximum)')
     parser_trades.add_argument('-p', '--pair', default=None, help=pair_help)
     parser_trades.set_defaults(sub_func=trades)
+
+    # Get trade volume
+    parser_trade_volume = subparsers.add_parser(
+        'trade_volume',
+        aliases=['tv'],
+        help='[private] Get trade volume',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser_trade_volume.add_argument('-p', '--pair', default=gv.DEFAULT_PAIR, help=pair_help)
+    parser_trade_volume.set_defaults(sub_func=get_trade_volume)
+
 
     # User Funding
 
