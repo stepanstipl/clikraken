@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -* coding: utf8 -*-
 
 """
 clikraken.api.private.get_trade_volume
@@ -37,11 +37,16 @@ def get_trade_volume(args):
         asset_dict['volume'] = res['volume']
         asset_dict['id'] = fid
         asset_dict['fee'] = float(item['fee'])
-        asset_dict['min_fee'] = float(item['min_fee'])
-        asset_dict['max_fee'] = float(item['max_fee'])
-        asset_dict['next_fee'] = float(item['next_fee'])
-        asset_dict['tier_volume'] = float(item['tier_volume'])
-        asset_dict['next_volume'] = float(item['next_volume'])
+        asset_dict['min_fee'] = float(item['minfee'])
+        asset_dict['max_fee'] = float(item['maxfee'])
+
+        if "nexfee" in item:
+            asset_dict['next_fee'] = float(item['nextfee'])
+
+        if "nexvolume" in item:
+            asset_dict['next_volume'] = float(item['nextvolume'])
+
+        asset_dict['tier_volume'] = float(item['tiervolume'])
 
         fees_list.append(asset_dict)
 
