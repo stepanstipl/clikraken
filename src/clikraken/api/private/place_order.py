@@ -33,18 +33,27 @@ def place_order(args):
     if gv.TRADING_AGREEMENT == 'agree':
         api_params['trading_agreement'] = 'agree'
 
-    if args.ordertype == 'limit':
+    if args.ordertype == 'limit' or args.ordertype == 'iceberg':
         if args.price is None:
-            logger.error('For limit orders, the price must be given!')
+            logger.error('For limit and iceberg orders, the price must be given!')
             return
         else:
             api_params['price'] = args.price
+
+    if args.ordertype == 'iceberg':
+        if args.displayvol is None:
+            logger.error('For iceberg orders, the display price must be given!')
+            return
+        else:
+            api_params['displayvol'] = args.displayvol
+
     if args.ordertype == 'trailing-stop':
         if args.price is None:
             logger.error('For trailing-stop orders, the price must be given!')
             return
         else:
             api_params['price'] = args.price
+
     elif args.ordertype == 'market':
         if args.price is not None:
             logger.warn('price is ignored for market orders!')
@@ -54,7 +63,7 @@ def place_order(args):
         api_params['userref'] = args.userref
 
     oflags = []  # order flags
-    if args.ordertype == 'limit':
+    if args.ordertype == 'limit' or args.ordertype == 'iceberg':
         if not args.nopost:
             # for limit orders, by default set post-only order flag
             oflags.append('post')
