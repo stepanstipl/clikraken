@@ -189,8 +189,8 @@ def parse_args():
     parser_place.add_argument('price', default=None, nargs='?')
     parser_place.add_argument('-l', '--leverage', default="none", help='leverage for margin trading')
     parser_place.add_argument('-p', '--pair', default=gv.DEFAULT_PAIR, help=pair_help)
-    parser_place.add_argument('-t', '--ordertype', choices=['market', 'limit', 'trailing-stop', 'iceberg'], default='limit',
-                              help="order type. Currently implemented: [limit, market, trailing-stop, 'iceberg'].")
+    parser_place.add_argument('-t', '--ordertype', choices=['market', 'limit', 'trailing-stop', 'iceberg', 'stop-loss'], default='limit',
+                              help="order type. Currently implemented: [limit, market, trailing-stop, iceberg, stop-loss].")
     parser_place.add_argument('-d', '--displayvol', default="none", help='display volume for iceberg orders')
     parser_place.add_argument('-s', '--starttm', default=0, help="scheduled start time")
     parser_place.add_argument('-e', '--expiretm', default=0, help="expiration time")
