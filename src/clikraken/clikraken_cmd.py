@@ -195,6 +195,7 @@ def parse_args():
     parser_place.add_argument('-s', '--starttm', default=0, help="scheduled start time")
     parser_place.add_argument('-e', '--expiretm', default=0, help="expiration time")
     parser_place.add_argument('-r', '--userref', help="user reference id.  32-bit signed number.  (optional)")
+    parser_place.add_argument('-R', '--reduceonly', action='store_true', help="reduce only order type")
     parser_place.add_argument('-q', '--viqc', action='store_true', help="volume in quote currency")
     parser_place.add_argument('-T', '--nopost', action='store_true',
                               help="disable 'post-only' option (for limit taker orders)")

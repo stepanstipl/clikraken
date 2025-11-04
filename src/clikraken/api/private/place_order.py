@@ -76,6 +76,9 @@ def place_order(args):
     if args.validate:
         api_params['validate'] = 'true'
 
+    if args.reduceonly:
+        api_params['reduce_only'] = 'true'
+
     res = query_api('private', 'AddOrder', api_params, args)
 
     descr = res.get('descr')
