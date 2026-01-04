@@ -1,7 +1,7 @@
 {
   description = "Command-line client for the Kraken exchange";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   outputs = { self, nixpkgs, }:
     let
@@ -26,6 +26,9 @@
             name = "clikraken";
             inherit version;
 
+            pyproject = true;
+            build-system = [ pkgs.python3Packages.setuptools ];
+
             src = ./.;
 
             checkPhase =
@@ -36,6 +39,7 @@
               krakenex
               arrow
               tabulate
+              colorlog
             ];
 
             meta = with pkgs.lib; {
@@ -53,16 +57,17 @@
             # The Nix packages provided in the environment
             buildInputs = with pkgs.python3Packages; [
               requests
-	      krakenex
-	      arrow
-	      tabulate
-	      setuptools 
-	    ] ++ [
-	      pkgs.pipenv
-	    ];
+	            krakenex
+	            arrow
+	            tabulate
+	            setuptools 
+              colorlog
+	          ] ++ [
+	            pkgs.pipenv
+	          ];
 	
 	    shellHook = ''
-              export PYTHONPATH="$PYTHONPATH:$(pwd)/src" 
+        export PYTHONPATH="$PYTHONPATH:$(pwd)/src" 
 	      alias clikraken="python -m clikraken"
 	    '';
           };
